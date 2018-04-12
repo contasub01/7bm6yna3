@@ -3,11 +3,16 @@ import asyncio
 import random
 import re
 import time
-import secreto
-
-TOKEN = secreto.seu_token()
+import os
 
 client = discord.Client()
+
+is_prod = os.environ.get('IS_HEROKU', None)
+if is_prod:
+    token = os.environ.get('TOKEN')
+else:
+    import secreto
+    token = secreto.token()
 
 msg_id = None
 msg_user = None
@@ -469,4 +474,4 @@ async def on_member_ban(user):
 
 
 
-client.run(TOKEN)
+client.run(token)
