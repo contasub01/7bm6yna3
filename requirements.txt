@@ -1,7 +1,4 @@
-django==2.0.1
-django-admin-tools==0.8.1
-pytz==2017.3
-virtualenv==15.1.0
-virtualenvwrapper-win==1.2.5
-async-timeout==2.0.0
-discord.py==0.16.12
+discord.py
+async
+random
+time
