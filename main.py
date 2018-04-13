@@ -112,9 +112,8 @@ admin =discord.Embed(
                     ":video_game: :  **!jogando** - Altere o status do bot\n"
                     "Digite `!jogando <mensagem>` para que o bot fique com esse status.\n"
                     "\n"
-                    ":hammer: :  **!punir** - Alguém infringiu as regras?\n"
-                    "Digite `!punir (usuário)` para acessar as opções de punição (ban, kick, mute).\n"
-                    "Comando em **DESENVOLVIMENTO** - Ainda não funcional.\n"
+                    ":hammer: :  **Puniões** - Alguém infringiu as regras?\n"
+                    "Comandos: `!mute (membro)`, `!unmute (membro)`, `!ban (membro)`, `!kick (membro)`."
                     "\n"
                     ":performing_arts: :  **!status** - Altere o meu status\n"
                     "Selecione o meu status como **ausente** ou **online**.\n"
@@ -275,7 +274,7 @@ async def on_message(message):
 
 
 
-    if message.content.lower().startswith('!delete') and message.author.id == message.author.server_permissions.administrator:
+    if message.content.lower().startswith('!delete') and message.author.id == message.author.server_permissions.manage_messages:
         try:
             qntdd = message.content.strip('!delete ')
             qntdd = toint(qntdd)
@@ -298,12 +297,6 @@ async def on_message(message):
             return
 
 
-
-    if message.content.lower().startswith('!punir') and message.author.id == message.author.server_permissions.administrator:
-        userID = message.author.id
-        await client.send_message(message.channel, "<@%s> ***Como aplicar uma punição:***\n- !ban <usuário>\n- !mute <usuário>**\n- !unmute <usuário>\n" % (userID))
-
-
     if message.content.lower().startswith('!ping'):
         timep = time.time()
         emb = discord.Embed(title='Aguarde...', color=0x565656)
@@ -323,7 +316,7 @@ async def on_message(message):
     if message.content.lower().startswith("!ban"):
         try:
             # Vai verificar se quem usou o comando tem permissão de adm
-            if not message.author.server_permissions.administrator:
+            if not message.author.server_permissions.ban_members:
                 userID = message.author.id
                 return await client.send_message(message.channel, '<@%s> ⚠️Permissão insuficiente' % (userID))
             author = message.author.mention
@@ -336,10 +329,25 @@ async def on_message(message):
             return await client.send_message(message.channel, '{} ⚠️ Não posso banir esse membro: {}'.format(author,user.mention))
 
 
+    if message.content.lower().startswith("!kick"):
+        try:
+            # Vai verificar se quem usou o comando tem permissão
+            if not message.author.server_permissions.kick_members:
+                userID = message.author.id
+                return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
+            author = message.author.mention
+            user = message.mentions[0]
+            await client.ban(user)
+            await client.send_message(message.channel, ":no_entry: -  ***Jogador expulso!***\n\nO usuário {} foi expulso!\Expulso por: {}".format(user.mention,
+                                                                                                   author))
+        # no caso do membro mencionado ser um adm vai enviar uma messagem
+        except discord.errors.Forbidden:
+            return await client.send_message(message.channel, '{} ⚠️ Não posso expulsar esse membro: {}'.format(author,user.mention))
+
 
     if message.content.lower().startswith("!mute"):
         # vai verificar se quem usou o comando possui permissão de adm
-        if not message.author.server_permissions.administrator:
+        if not message.author.server_permissions.manage_roles:
             userID = message.author.id
             return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
         author = message.author.mention
@@ -352,7 +360,7 @@ async def on_message(message):
 
     if message.content.lower().startswith("!unmute"):
         # vai verificar se quem usou o comando possui permissão de adm
-        if not message.author.server_permissions.administrator:
+        if not message.author.server_permissions.manage_roles:
             userID = message.author.id
             return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
         author = message.author.mention
