@@ -140,7 +140,7 @@ async def on_message(message):
 
 
     if message.content.lower().startswith('!cheddar'):
-        await client.send_message(message.channel, "Eu mesmo!\n***Agora na versão 2.5.8***  :cheese:")
+        await client.send_message(message.channel, "Eu mesmo!\n***Agora na versão 2.6.4***  :cheese:")
 
     if message.content.lower().startswith('!moeda'):
         escolha1 = random.randint(1, 2)
@@ -267,14 +267,14 @@ async def on_message(message):
         await client.add_reaction(message, '👍🏾')
         await client.add_reaction(message, '👍🏿')
 
-    if message.content.startswith('!jogando') and message.author.id == message.author.server_permissions.administrator:
+    if message.content.startswith('!jogando') and message.author.server_permissions.administrator:
         game = message.content[8:]
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Mudando o status para: " + game + "")
 
 
 
-    if message.content.lower().startswith('!delete') and message.author.id == message.author.server_permissions.manage_messages:
+    if message.content.lower().startswith('!delete') and message.author.server_permissions.manage_messages:
         try:
             qntdd = message.content.strip('!delete ')
             qntdd = toint(qntdd)
@@ -313,43 +313,51 @@ async def on_message(message):
         await client.send_message(message.channel, "{}".format(message.author.mention))
         await client.send_message(message.channel, embed=embed)
 
+
     if message.content.lower().startswith("!ban"):
+        await client.delete_message(message)
         try:
-            # Vai verificar se quem usou o comando tem permissão de adm
-            if not message.author.server_permissions.ban_members:
+            if message.author.server_permissions.ban_members:
+                author = message.author.mention
+                user = message.mentions[0]
+                await client.ban(user)
+                await client.send_message(message.channel,
+                                          ":no_entry_sign: -  ***Jogador banido!***\n\nO usuário {} foi banido!\nBanido por: {}".format(
+                                              user.mention,
+                                              author))
+            else:
                 userID = message.author.id
                 return await client.send_message(message.channel, '<@%s> ⚠️Permissão insuficiente' % (userID))
-            author = message.author.mention
-            user = message.mentions[0]
-            await client.ban(user)
-            await client.send_message(message.channel, ":no_entry_sign: -  ***Jogador banido!***\n\nO usuário {} foi banido!\nBanido por: {}".format(user.mention,
-                                                                                                   author))
-        # no caso do membro mencionado ser um adm vai enviar uma messagem
+                # no caso do membro mencionado ser um adm vai enviar uma messagem
         except discord.errors.Forbidden:
-            return await client.send_message(message.channel, '{} ⚠️ Não posso banir esse membro: {}'.format(author,user.mention))
+            return await client.send_message(message.channel, '{} ⚠️ Não posso banir esse membro: {}'.format(author, user.mention))
 
 
     if message.content.lower().startswith("!kick"):
+        await client.delete_message(message)
         try:
-            # Vai verificar se quem usou o comando tem permissão
-            if not message.author.server_permissions.kick_members:
+            if message.author.server_permissions.kick_members:
+                author = message.author.mention
+                user = message.mentions[0]
+                await client.kick(user)
+                await client.send_message(message.channel,
+                                          ":no_entry: -  ***Jogador expulso!***\n\nO usuário {} foi expulso!\nExpulso por: {}".format(
+                                              user.mention,
+                                              author))
+            else:
                 userID = message.author.id
-                return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
-            author = message.author.mention
-            user = message.mentions[0]
-            await client.ban(user)
-            await client.send_message(message.channel, ":no_entry: -  ***Jogador expulso!***\n\nO usuário {} foi expulso!\Expulso por: {}".format(user.mention,
-                                                                                                   author))
-        # no caso do membro mencionado ser um adm vai enviar uma messagem
+                return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente.' % (userID))
+                # no caso do membro mencionado ser um adm vai enviar uma messagem
         except discord.errors.Forbidden:
-            return await client.send_message(message.channel, '{} ⚠️ Não posso expulsar esse membro: {}'.format(author,user.mention))
+            return await client.send_message(message.channel, '{} ⚠️ Não posso expulsar esse membro: {}'.format(author, user.mention))
 
 
     if message.content.lower().startswith("!mute"):
+        await client.delete_message(message)
         # vai verificar se quem usou o comando possui permissão de adm
         if not message.author.server_permissions.manage_roles:
             userID = message.author.id
-            return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
+            return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente.' % (userID))
         author = message.author.mention
         user = message.mentions[0]
         """Lembrando que tem que ter o cargo mutado no seu server"""
@@ -359,10 +367,11 @@ async def on_message(message):
                                  ':zipper_mouth: -  ***Jogador mutado!***\n\nO usuário {} foi mutado!\nSilenciado por: {}'.format(user.mention, author))
 
     if message.content.lower().startswith("!unmute"):
+        await client.delete_message(message)
         # vai verificar se quem usou o comando possui permissão de adm
         if not message.author.server_permissions.manage_roles:
             userID = message.author.id
-            return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente' % (userID))
+            return await client.send_message(message.channel, '<@%s> ⚠️ Permissão insuficiente.' % (userID))
         author = message.author.mention
         user = message.mentions[0]
         """Lembrando que tem que ter o cargo mutado no seu server"""
