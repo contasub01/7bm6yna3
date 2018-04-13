@@ -113,7 +113,7 @@ admin =discord.Embed(
                     "Digite `!jogando <mensagem>` para que o bot fique com esse status.\n"
                     "\n"
                     ":hammer: :  **Puniões** - Alguém infringiu as regras?\n"
-                    "Comandos: `!mute (membro)`, `!unmute (membro)`, `!ban (membro)`, `!kick (membro)`."
+                    "Comandos: `!mute (membro)`, `!unmute (membro)`, `!ban (membro)`, `!kick (membro)`.\n"
                     "\n"
                     ":performing_arts: :  **!status** - Altere o meu status\n"
                     "Selecione o meu status como **ausente** ou **online**.\n"
