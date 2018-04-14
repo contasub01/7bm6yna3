@@ -42,55 +42,43 @@ say =discord.Embed(
 
 )
 
-biografia =discord.Embed(
-        title="Quem sou eu?",
-        color=0x4BF085,
-        description="Sou um queijo. Não qualquer tipo de queijo. O melhor tipo de queijo.\n"
-                    "Diga não ao presunto. Também não confie em mussarela, eles mentem...\n"
-                    "- Atenciosamente, Sr Cheese :cheese:"
-
-)
-
 
 help =discord.Embed(
         title="AJUDA:",
         color=0xFE9A2E,
-        description=":pushpin:  Meu prefixo é :exclamation: (ponto de exclamação)\n"
+        description=":pushpin:  Meu prefixo é **^**\n"
                     "\n"
                     "**COMANDOS:**\n"
                     "\n"
-                    ":cheese: :  **!cheddar** - Estou vivo? \n"
-                    "Esse comando mostra a versão atual do meu desenvolvimento.\n"
-                    "\n"
-                    ":books: :  **!biografia** - Quem sou eu?\n"
+                    ":books: :  **^biografia** - Quem sou eu?\n"
                     "Saiba um pouco mais sobre mim. Eu posso ser bem interessante.\n"
                     "\n"
-                    ":small_orange_diamond: :  **!moeda** - Cara ou coroa?\n"
+                    ":small_orange_diamond: :  **^moeda** - Cara ou coroa?\n"
                     "Ao usar esse comando, eu jogo uma moeda para o alto, e coloco uma reação na sua mensagem indicando se a moeda caiu cara ou coroa.\n"
                     "\n"
-                    ":question: :  **!ask** - Me faça uma pergunta!\n"
-                    "Digite `!ask (pergunta)` e obtenha uma resposta. Apenas respostas de sim ou não!\n"
+                    ":question: :  **^ask** - Me faça uma pergunta!\n"
+                    "Digite `^ask (pergunta)` e obtenha uma resposta. Apenas respostas de sim ou não!\n"
                     "\n"
-                    ":bulb: :  **!sugerir** - Envie sua sugestão!\n"
-                    "Digite `!sugerir (sua sugestão)`.  Você também pode votar em sugestões enviadas por outros jogadores e contribuir com a sua opinião.\n"
+                    ":bulb: :  **^sugerir** - Envie sua sugestão!\n"
+                    "Digite `^sugerir (sua sugestão)`.  Você também pode votar em sugestões enviadas por outros jogadores e contribuir com a sua opinião.\n"
                     "\n"
-                    ":satellite: :  **!ping** - Pong!\n"
+                    ":satellite: :  **^ping** - Pong!\n"
                     "Use esse comando para ver o ping (é, meio obvio, eu sei).\n"
                     "\n"
-                    ":frame_photo: :  **!img** - Quer ibagens?\n"
+                    ":frame_photo: :  **^img** - Quer ibagens?\n"
                     "Peça ibagens como o Datena. Eu quero ibagens!\n"
                     "\n"
-                    ":bust_in_silhouette: :  **!info** - Informações do usuário\n"
-                    "Digite `!info (usuário)` para ver informações gerais desse membro.\n"
+                    ":bust_in_silhouette: :  **^info** - Informações do usuário\n"
+                    "Digite `^info (usuário)` para ver informações gerais desse membro.\n"
                     "\n"
-                    ":raising_hand: :  **!help** ou **!ajuda** - Precisa de ajuda?\n"
+                    ":raising_hand: :  **^help** ou **^ajuda** - Precisa de ajuda?\n"
                     "Esse comando mostra todos os outros comandos (ou quase todos).\n"
                     "\n"
-                    ":cop: :  **!admin** - Comandos de moderação.\n"
+                    ":cop: :  **^admin** - Comandos de moderação.\n"
                     "Exibe uma lista de comandos que são de uso exclusivo da equipe do servidor.\n"
                     "\n"
                     "É isso que eu faço!\n"
-                    "**Abraço do Cheddinha.**"
+                    "**Abraço do Dobby.**"
 )
 
 
@@ -132,17 +120,16 @@ bypass_list = ["388654625693368331", "430095009614921729"]
 
 @client.event
 async def on_message(message):
-    if message.content.lower().startswith("!biografia"):
-        embed = discord.Embed(title="Quem sou eu?", description="Sou um queijo. Não qualquer tipo de queijo. O melhor tipo de queijo.\nDiga não ao presunto. Também não confie em mussarela, eles não dizem a verdade...", color=0x4BF085)
+    if message.content.lower().startswith("^biografia"):
+        embed = discord.Embed(title="Quem sou eu?", description="Eu sou um BOT criado exclusivamente para servir. Essa é a minha função..\n"
+                                                                "Sou um elfo doméstico desse Discord. Fui criado e desenvolvido por: Cheddar#0565\n"
+                                                                "- Atenciosamente, Dobby - O Elfo Doméstico 🧙", color=0x4BF085)
         embed.set_thumbnail(url='https://i.imgur.com/fGo6HFq.png')
         embed.set_footer(text="- Atenciosamente, Sr Cheese 🧀")
         await client.send_message(message.channel, embed=embed)
 
 
-    if message.content.lower().startswith('!cheddar'):
-        await client.send_message(message.channel, "Eu mesmo!\n***Agora na versão 2.6.4***  :cheese:")
-
-    if message.content.lower().startswith('!moeda'):
+    if message.content.lower().startswith('^moeda'):
         escolha1 = random.randint(1, 2)
         if escolha1 == 1:
             await client.add_reaction(message, '😀')
@@ -150,7 +137,7 @@ async def on_message(message):
             await client.add_reaction(message, '👑')
 
 
-    if message.content.lower().startswith('!dev'):
+    if message.content.lower().startswith('^dev'):
         if message.author.id == "388654625693368331":  # adicione o seu ID!
             userID = message.author.id
             await client.send_message(message.channel, "<@%s> Enviei para você no privado, junto com um nude ( ͡° ͜ʖ ͡°)" % (userID))
@@ -161,7 +148,7 @@ async def on_message(message):
 
 
 
-    if message.content.lower().startswith('!ask '):
+    if message.content.lower().startswith('^ask '):
         escolha = random.randint(1, 8)
         if escolha == 1:
             userID = message.author.id
@@ -189,20 +176,15 @@ async def on_message(message):
             await client.send_message(message.channel, "<@%s> Será? :thinking:" % (userID))
 
 
-    if message.content.lower().startswith('beibe beibe do beibe do biruleibe leibe?'):
-        userID = message.author.id
-        await client.send_message(message.channel, "<@%s> Ah vai te toma no cu rapa" % (userID))
-
-
-    if message.content.lower().startswith("!help"):
+    if message.content.lower().startswith("^help"):
         await client.send_message(message.channel, embed=help)
 
 
-    if message.content.lower().startswith("!ajuda"):
+    if message.content.lower().startswith("^ajuda"):
         await client.send_message(message.channel, embed=help)
 
 
-    if message.content.lower().startswith("!admin"):
+    if message.content.lower().startswith("^admin"):
         if message.author.server_permissions.administrator:
             userID = message.author.id
             await client.send_message(message.channel, "<@%s> Enviei para você no privado." % (userID))
@@ -212,7 +194,7 @@ async def on_message(message):
             await client.send_message(message.channel, "<@%s> Você não tem permissão para usar esse comando." % (userID))
 
 
-    if message.content.lower().startswith('!say'):
+    if message.content.lower().startswith('^say'):
         if message.author.server_permissions.administrator:
             await client.delete_message(message)
             args = message.content.split(" ")
@@ -239,7 +221,7 @@ async def on_message(message):
 
 
 
-    if message.content.lower().startswith('!sugerir '):
+    if message.content.lower().startswith('^sugerir '):
             await client.delete_message(message)
             userID = message.author.id
             await client.send_message(message.channel, "<@%s> **Sua sugestão foi enviada!** :bulb:\nObrigado por contribuir com suas ideias.\nIremos analisar sua sugestão o quanto antes." % (userID))
@@ -259,22 +241,14 @@ async def on_message(message):
             await client.add_reaction(message, '👎')
 
 
-
-    if message.channel.id == "424724808811675648":
-        await client.add_reaction(message, '👍🏻')
-        await client.add_reaction(message, '👍🏼')
-        await client.add_reaction(message, '👍🏽')
-        await client.add_reaction(message, '👍🏾')
-        await client.add_reaction(message, '👍🏿')
-
-    if message.content.startswith('!jogando') and message.author.server_permissions.administrator:
+    if message.content.startswith('^jogando') and message.author.server_permissions.administrator:
         game = message.content[8:]
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Mudando o status para: " + game + "")
 
 
 
-    if message.content.lower().startswith('!delete') and message.author.server_permissions.manage_messages:
+    if message.content.lower().startswith('^delete') and message.author.server_permissions.manage_messages:
         try:
             qntdd = message.content.strip('!delete ')
             qntdd = toint(qntdd)
@@ -297,7 +271,7 @@ async def on_message(message):
             return
 
 
-    if message.content.lower().startswith('!ping'):
+    if message.content.lower().startswith('^ping'):
         timep = time.time()
         emb = discord.Embed(title='Aguarde...', color=0x565656)
         pingm0 = await client.send_message(message.channel, embed=emb)
@@ -307,14 +281,7 @@ async def on_message(message):
         await client.edit_message(pingm0, embed=pingm1)
 
 
-    if message.content.lower().startswith('!img'):
-        embed = discord.Embed(color=0x9910CD)
-        embed.set_image(url="https://i.imgur.com/cCDKElp.png")
-        await client.send_message(message.channel, "{}".format(message.author.mention))
-        await client.send_message(message.channel, embed=embed)
-
-
-    if message.content.lower().startswith("!ban"):
+    if message.content.lower().startswith("^ban"):
         await client.delete_message(message)
         try:
             if message.author.server_permissions.ban_members:
@@ -333,7 +300,7 @@ async def on_message(message):
             return await client.send_message(message.channel, '{} ⚠️ Não posso banir esse membro: {}'.format(author, user.mention))
 
 
-    if message.content.lower().startswith("!kick"):
+    if message.content.lower().startswith(^!kick"):
         await client.delete_message(message)
         try:
             if message.author.server_permissions.kick_members:
@@ -352,7 +319,7 @@ async def on_message(message):
             return await client.send_message(message.channel, '{} ⚠️ Não posso expulsar esse membro: {}'.format(author, user.mention))
 
 
-    if message.content.lower().startswith("!mute"):
+    if message.content.lower().startswith("^mute"):
         await client.delete_message(message)
         # vai verificar se quem usou o comando possui permissão de adm
         if not message.author.server_permissions.manage_roles:
@@ -366,7 +333,7 @@ async def on_message(message):
         await client.send_message(message.channel,
                                  ':zipper_mouth: -  ***Jogador mutado!***\n\nO usuário {} foi mutado!\nSilenciado por: {}'.format(user.mention, author))
 
-    if message.content.lower().startswith("!unmute"):
+    if message.content.lower().startswith("^unmute"):
         await client.delete_message(message)
         # vai verificar se quem usou o comando possui permissão de adm
         if not message.author.server_permissions.manage_roles:
@@ -380,32 +347,32 @@ async def on_message(message):
         await client.send_message(message.channel,
                                   ':speaking_head: -  ***Jogador desmutado!***\n\nO usuário {} foi desmutado!\nSilenciamento removido por: {}'.format(user.mention, author))
 
-    if message.content.lower().startswith("!status") and message.author.server_permissions.administrator:
+    if message.content.lower().startswith("^status") and message.author.server_permissions.administrator:
         embed6 = discord.Embed(
             title="Altere o meu status:",
             color=0x690FC3,
             description="📗 : **Online**\n"
-                        "Use `!s online`\n"
+                        "Use `^s online`\n"
                         "\n"
                         "📒 : **Ausente**\n"
-                        "Use `!s ausente`", )
+                        "Use `^s ausente`", )
         embed6.set_footer(text="*Pode demorar alguns instantes.")
         embed6.set_thumbnail(url="https://i.imgur.com/fGo6HFq.png")
         await client.send_message(message.channel, embed=embed6)
 
-    if message.content.lower().startswith("!s online") and message.author.server_permissions.administrator:
+    if message.content.lower().startswith("^s online") and message.author.server_permissions.administrator:
         embed4 = discord.Embed(
             title="Status alterado!",
             color=0x690FC3,
             description="📗 : **Online**\n"
                         "\n"
                         "Agora eu estou online!", )
-        embed4.set_footer(text="Use !status para alterar o status")
+        embed4.set_footer(text="Use ^status para alterar o status")
         embed4.set_thumbnail(url="https://i.imgur.com/fGo6HFq.png")
         await client.change_presence(status=discord.Status("online"))
         await client.send_message(message.channel, embed=embed4)
 
-    if message.content.lower().startswith("!s ausente") and message.author.server_permissions.administrator:
+    if message.content.lower().startswith("^s ausente") and message.author.server_permissions.administrator:
         embed5 = discord.Embed(
             title="Status alterado!",
             color=0x690FC3,
@@ -417,7 +384,7 @@ async def on_message(message):
         await client.change_presence(status=discord.Status("idle"))
         await client.send_message(message.channel, embed=embed5)
 
-    if message.content.startswith('!info'):
+    if message.content.startswith('^info'):
         try:
             user = message.mentions[0]
             userjoinedat = str(user.joined_at).split('.', 1)[0]
