@@ -32,7 +32,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('--------CHED--------')
-    await client.change_presence(game=discord.Game(name='!help'))
+    await client.change_presence(game=discord.Game(name='criado por Cheddar#0565'))
 
 
 say =discord.Embed(
@@ -89,28 +89,28 @@ admin =discord.Embed(
                     "\n"
                     "**COMANDOS:**\n"
                     "\n"
-                    ":x: :  **!delete** - Limpe o chat\n"
+                    ":x: :  **^delete** - Limpe o chat\n"
                     "Esse comando deleta um número de mensagens do chat em que ele for executado.\n"
-                    "Digite `!delete <numero de 1 a 100>` para deletar as mensagens.\n"
+                    "Digite `^delete <numero de 1 a 100>` para deletar as mensagens.\n"
                     "*O comando digitado por você já será automaticamente deletado.\n"
                     "\n"
-                    ":loudspeaker: :  **!say** - Mande algum aviso\n"
-                    "Digite `!say <mensagem>` para que o bot fale por você.\n"
+                    ":loudspeaker: :  **^say** - Mande algum aviso\n"
+                    "Digite `^say <mensagem>` para que o bot fale por você.\n"
                     "\n"
-                    ":video_game: :  **!jogando** - Altere o status do bot\n"
-                    "Digite `!jogando <mensagem>` para que o bot fique com esse status.\n"
+                    ":video_game: :  **^jogando** - Altere o status do bot\n"
+                    "Digite `^jogando <mensagem>` para que o bot fique com esse status.\n"
                     "\n"
                     ":hammer: :  **Puniões** - Alguém infringiu as regras?\n"
-                    "Comandos: `!mute (membro)`, `!unmute (membro)`, `!ban (membro)`, `!kick (membro)`.\n"
+                    "Comandos: `^mute (membro)`, `^unmute (membro)`, `^ban (membro)`, `^kick (membro)`.\n"
                     "\n"
-                    ":performing_arts: :  **!status** - Altere o meu status\n"
+                    ":performing_arts: :  **^status** - Altere o meu status\n"
                     "Selecione o meu status como **ausente** ou **online**.\n"
                     "\n"
-                    ":gear: :  **!dev** - Funções do desenvolvedor.\n"
+                    ":gear: :  **^dev** - Funções do desenvolvedor.\n"
                     "Ignore, você não vai precisar usar isso. O que será que tem aqui?\n"
                     "\n"
                     "Esses são os comandos exclusivos.\n"
-                    "**Cheddar BOT - Modo admin.**"
+                    "**Dobby BOT - Modo admin.**"
 )
 
 
